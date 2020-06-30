@@ -904,30 +904,36 @@ void TextDiagnostic::emitDiagnosticLoc(FullSourceLoc Loc, PresumedLoc PLoc,
 }
 
 void TextDiagnostic::emitIncludeLocation(FullSourceLoc Loc, PresumedLoc PLoc) {
-  if (DiagOpts->ShowLocation && PLoc.isValid())
-    OS << "In file included from " << PLoc.getFilename() << ':'
-       << PLoc.getLine() << ":\n";
-  else
+  if (DiagOpts->ShowLocation && PLoc.isValid()) {
+    OS << "In file included from ";
+    emitFilename(PLoc.getFilename(), Loc.getManager());
+    OS << ':' << PLoc.getLine() << ":\n";
+  } else {
     OS << "In included file:\n";
+  }
 }
 
 void TextDiagnostic::emitImportLocation(FullSourceLoc Loc, PresumedLoc PLoc,
                                         StringRef ModuleName) {
-  if (DiagOpts->ShowLocation && PLoc.isValid())
-    OS << "In module '" << ModuleName << "' imported from "
-       << PLoc.getFilename() << ':' << PLoc.getLine() << ":\n";
-  else
+  if (DiagOpts->ShowLocation && PLoc.isValid()) {
+    OS << "In module '" << ModuleName << "' imported from ";
+    emitFilename(PLoc.getFilename(), Loc.getManager());
+    OS << ':' << PLoc.getLine() << ":\n";
+  } else {
     OS << "In module '" << ModuleName << "':\n";
+  }
 }
 
 void TextDiagnostic::emitBuildingModuleLocation(FullSourceLoc Loc,
                                                 PresumedLoc PLoc,
                                                 StringRef ModuleName) {
-  if (DiagOpts->ShowLocation && PLoc.isValid())
-    OS << "While building module '" << ModuleName << "' imported from "
-      << PLoc.getFilename() << ':' << PLoc.getLine() << ":\n";
-  else
+  if (DiagOpts->ShowLocation && PLoc.isValid()) {
+    OS << "While building module '" << ModuleName << "' imported from ";
+    emitFilename(PLoc.getFilename(), Loc.getManager());
+    OS << ':' << PLoc.getLine() << ":\n";
+  } else {
     OS << "While building module '" << ModuleName << "':\n";
+  }
 }
 
 /// Find the suitable set of lines to show to include a set of ranges.
