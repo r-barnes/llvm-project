@@ -154,6 +154,11 @@ New checks
   Alias to the :doc:`bugprone-signal-handler
   <clang-tidy/checks/bugprone-signal-handler>` check.
 
+- New :doc:`cuda-has-device-guard
+  <clang-tidy/checks/cuda-has-device-guard>` check.
+
+  FIXME: add release notes.
+
 - New :doc:`performance-no-int-to-ptr
   <clang-tidy/checks/performance-no-int-to-ptr>` check.
 

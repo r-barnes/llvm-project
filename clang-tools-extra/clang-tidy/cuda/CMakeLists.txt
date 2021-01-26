@@ -6,6 +6,7 @@ set(LLVM_LINK_COMPONENTS
 add_clang_library(clangTidyCudaModule
   CheckKernelLaunchCheck.cpp
   CudaTidyModule.cpp
+  HasDeviceGuardCheck.cpp
 
   LINK_LIBS
   clangTidy

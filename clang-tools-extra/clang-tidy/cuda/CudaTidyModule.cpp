@@ -10,6 +10,7 @@
 #include "../ClangTidyModule.h"
 #include "../ClangTidyModuleRegistry.h"
 #include "CheckKernelLaunchCheck.h"
+#include "HasDeviceGuardCheck.h"
 
 namespace clang {
 namespace tidy {
@@ -18,7 +19,10 @@ namespace cuda {
 class CudaModule : public ClangTidyModule {
 public:
   void addCheckFactories(ClangTidyCheckFactories &CheckFactories) override {
-    CheckFactories.registerCheck<CheckKernelLaunchCheck>("check-kernel-launch");
+    CheckFactories.registerCheck<CheckKernelLaunchCheck>(
+        "cuda-check-kernel-launch");
+    CheckFactories.registerCheck<HasDeviceGuardCheck>(
+        "cuda-has-device-guard");
   }
 };
 
